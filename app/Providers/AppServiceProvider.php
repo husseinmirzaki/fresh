@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Classes\MyAuthManager;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        dd("Changes are made in " . __FILE__, Auth::attempt(["username" => "test", "password" => "test"]));
     }
 
     /**
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment() === 'local')
+            $this->app->bind('auth', function ($app) {
+                return new MyAuthManager($app);
+            });
     }
 }
