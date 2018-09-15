@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        dd("Changes are made in " . __FILE__, Auth::attempt(["username" => "test", "password" => "test"]));
+        //dd("Changes are made in " . __FILE__, Auth::attempt(["username" => "test", "password" => "test"]));
     }
 
     /**
